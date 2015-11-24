@@ -13,9 +13,9 @@ public class Login
 	private String username;
 	private String password;
 	
-	private final String userName = "root";
+	private final String userName = "admin";
 
-	private final String pwd = "mysql";
+	private final String pwd = "";
 
 	private final String serverName = "localhost";
 

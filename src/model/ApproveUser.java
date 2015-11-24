@@ -15,9 +15,9 @@ public class ApproveUser {
 	private int person_id;
 	
 	  String url = "jdbc:mysql://localhost:3306/";
-	  String dbName = "test1";
+	  String dbName = "hw5";
 	  String driver = "com.mysql.jdbc.Driver";
-	  String userName = "root"; 
+	  String userName = "admin"; 
 	  String password = "";
 	
 

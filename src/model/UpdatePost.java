@@ -18,8 +18,8 @@ public class UpdatePost {
 	 String url = "jdbc:mysql://localhost:3306/";
 	  String dbName = "hw5";
 	  String driver = "com.mysql.jdbc.Driver";
-	  String userName = "root"; 
-	  String password = "mysql";
+	  String userName = "admin"; 
+	  String password = "";
 	
 
 
@@ -58,7 +58,7 @@ public class UpdatePost {
 			System.out.println("now inserting the data");
 			System.out.println("Now inserting the data in table post_id = "+ post_id + " "+ this.post_to_update + " " + this.person_id);
 			
-			String updateSQL = "UPDATE `test1`.`post` set `post` = ?,`person_id` = ? WHERE `id` = ?;";
+			String updateSQL = "UPDATE `hw5`.`post` set `post` = ?,`person_id` = ? WHERE `id` = ?;";
 			PreparedStatement preparedStatement = getConnection().prepareStatement(updateSQL);
 			preparedStatement.setString(1, post);
 			preparedStatement.setInt(2, user_id);

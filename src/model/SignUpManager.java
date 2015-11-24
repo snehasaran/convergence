@@ -29,8 +29,8 @@ public class SignUpManager{
 			String userGender = u.getGender();
 			int userAge = u.getAge();
 			String email = u.geteMail();		
-			String username = "root";
-			String password = " ";
+			String username = "admin";
+			String password = "";
 			String url = "jdbc:oracle:thin:@INGNRILPINFM01:1521:ORCL";
 
 			dbCon.connectToDB();

@@ -28,8 +28,8 @@ public class InsertUserDemo {
 	 String url = "jdbc:mysql://localhost:3306/";
 	  String dbName = "hw5";
 	  String driver = "com.mysql.jdbc.Driver";
-	  String userName = "root"; 
-	  String password = "mysql";
+	  String userName = "admin"; 
+	  String password = "";
 	
 
 
@@ -95,7 +95,7 @@ public class InsertUserDemo {
 			System.out.println("Now inserting the data in table to_insert_txteMail = "+ this.to_insert_txteMail);
 			
 			
-			String insertSQL = "INSERT INTO `test1`.`person` (`first_name`, `user_name`, `password`, `role_name`, `last_name`, `user_city`, `user_gender`, `user_state`, `user_age`, `user_email`) "
+			String insertSQL = "INSERT INTO `hw5`.`person` (`first_name`, `user_name`, `password`, `role_name`, `last_name`, `user_city`, `user_gender`, `user_state`, `user_age`, `user_email`) "
 					+ "VALUES (?, ?, ?, 'User', ?, ?, ?, ?, ?, ?);";
 			PreparedStatement preparedStatement = getConnection().prepareStatement(insertSQL);
 			preparedStatement.setString(1, this.to_insert_txtFirstName);

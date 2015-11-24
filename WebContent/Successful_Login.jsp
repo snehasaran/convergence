@@ -28,8 +28,8 @@ Connection conn = null;
 String url = "jdbc:mysql://localhost:3306/";
 String dbName = "hw5";
 String driver = "com.mysql.jdbc.Driver";
-String userName = "root"; 
-String password = "mysql";
+String userName = "admin"; 
+String password = "";
 try
 	{
 	System.out.println("Test 1");

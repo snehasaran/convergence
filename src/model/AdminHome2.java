@@ -3,7 +3,7 @@ package model;
 import java.sql.*;
 import java.util.Map;
 
-public class AdminHome 
+public class AdminHome2 
 {
 
 
@@ -18,22 +18,13 @@ public class AdminHome
 	public String[] group_name = new String[1000];
 	public Integer[] group_id = new Integer[1000];
 	public Integer[] person_id = new Integer[1000];
-	public String[] group_descr = new String[1000];
 	public String groupNameToInsert;
-	public String groupDescrToInsert;
 	
 	public void setGroupNameToInsert(String groupNameToInsert) {
 		this.groupNameToInsert = groupNameToInsert;
 	}
+
 	
-
-	public void setGroupDescrToInsert(String groupDescrToInsert) {
-		this.groupDescrToInsert = groupDescrToInsert;
-	}
-
-
-
-
 	public Connection getConnection() throws SQLException 
 	{
 		Connection conn = null;
@@ -59,34 +50,11 @@ public class AdminHome
 		String q2 = "select count(group_id) from group_person where flag = 'Pending'";
 		
 		//New query to display Groups
-		// String varname1 = ""		+ "select group_id,group_name,group_descr from groups;";
-		//String dispGroups = "select group_id,group_name,group_descr from groups";
 		
-		String dispGroups = ""
-				+ "select group_id,group_name,group_descr from groups;";
-		
-		try{
-			ps = getConnection().prepareStatement(dispGroups);
-			ResultSet rs = ps.executeQuery();
-			int i =0;
-			while(rs.next()){
-				group_id[i]=rs.getInt(1);
-				group_name[i] =rs.getString(2);
-				group_descr[i]=rs.getString(3);
-				
-				System.out.println(group_id[i] + " " + group_name[i]+""+group_descr[i]);
-				i++;
-			}
-			
-			rs.close();
-			ps.close();
-		}
-		catch(Exception e){
-			System.out.println("Cannot run the query");
-		}
+		String dispGroups = "select group_id,group_name from groups;";
 		
 		
-		/*try
+		try
 		{
 			ps = getConnection().prepareStatement(q1);
 			ps1 = getConnection().prepareStatement(q2);
@@ -121,53 +89,7 @@ public class AdminHome
 			System.out.println("Cannot run the query");
 			e.printStackTrace();
 			
-		}*/
-	}
-	
-	//createGroup method
-	public void createGroup(String group_name, String group_descr)
-	{
-		System.out.println("Inside createGroup() method");
-		//PreparedStatement ps;
-		String createGrpQuery;
-		int j = 0;
-		try{
-			// INSERT INTO groups (group_id, group_name) VALUES (?, ?);
-			System.out.println(group_name);
-			System.out.println(group_descr);
-			createGrpQuery = "INSERT INTO groups (group_name,group_descr) VALUES (?,?)";
-			PreparedStatement preparedStatement = getConnection().prepareStatement(createGrpQuery);
-			preparedStatement.setString(1, group_name);
-			preparedStatement.setString(2, group_descr);
-			
-			preparedStatement.executeUpdate();
 		}
-		catch (Exception e) 
-		{
-			System.out.println("Cannot run the query");
-			e.printStackTrace();
-			
-		}
-	}
-	
-	
-	//deactivateGroup method
-	public void deactivateGroup()
-	{
-		System.out.println("Inside deactivateGroup() method");
-		PreparedStatement ps;
-		String deactivateGrpQuery;
-		int j = 0;
-		try{
-			deactivateGrpQuery = "";
-		}
-		catch (Exception e) 
-		{
-			System.out.println("Cannot run the query");
-			e.printStackTrace();
-			
-		}
-		
 	}
 	
 	public void addUpdate(Map<Integer, String> chkbox)

@@ -54,7 +54,7 @@ private static final long serialVersionUID = 1L;
 		
 		System.out.println("The control comes to insertCoommentRequest function");
 		String req = request.getParameter("comment");
-		System.out.println("The value from tezt box is :" + req);
+		System.out.println("The value from text box is :" + req);
 		demo.setInsertCommentDemo(req);
 		
 		System.out.println("Username from text box is " + req );

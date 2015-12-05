@@ -36,7 +36,7 @@
 	</div>
 	</nav>
 
-	<form name="Admin_Home" action="LoginServlet" method="get"
+	<form name="Admin_Home" action="LoginServlet" method="post"
 		class="form-horizontal">
 		<div class="container-fluid ">
 			<%
@@ -50,7 +50,7 @@
 			%>
 			</h2>
 			<!-- Sneha changes -->
-			<div class="well well-sm">
+			<%--  <div class="well well-sm">
 				<div class="form-group">
 					<label class="col-lg-2 control-label">Admin Dashboard</label>
 					<div class="col-lg-10">
@@ -81,59 +81,59 @@
 
 					</div>
 				</div>
-			</div>
+			</div> --%>
 
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<div class="col-lg-10 col-lg-offset-2">
 					<button type="submit" class="btn btn-default" align="middle"
 						name="subAdd" id="subAdd" value="Add">Add</button>
 					<button type="submit" class="btn btn-primary" align="middle"
 						name="subReject" id="subReject" value="Reject">Reject</button>
 				</div>
+			</div> -->
+
+			<!-- New buttons -->
+			<div class="well well-sm">
+				<div class="form-group">
+					<label for="groupName" class="col-sm-2 control-label">Group
+						Name</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control"
+							placeholder="Sample Group Name" name="txtGroupName"
+							id="txtGroupName">
+					</div>
+				</div>
+				
+				
+				<div class="form-group">
+					<label for="groupDescr" class="col-sm-2 control-label">Group
+						Description</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control"
+							placeholder="Sample Group Description" name="txtGroupDescr"
+							id="txtGroupDescr">
+					</div>
+				</div>
+				
+				
 			</div>
+			<div class="form-group">
+				<div class="col-lg-10 col-lg-offset-2">
+					<button type="submit" class="btn btn-default" align="middle"
+						name="subLogin" id="createGroup" value="Create">Create</button>
+					<!--  <button type="submit" class="btn btn-primary" align="middle"
+						name="deactivateGroup" id="deactivateGroup" value="Deactivate">Deactivate</button>-->
+				</div>
+			</div>
+
+
+
+			<!-- New buttons end here -->
+
 
 			<!-- Sneha changes end -->
 
-			<%-- <table id="alignment" border="0" align="center">
-				<%
-				Integer i = 0;
-				Integer j = 0;
-				Integer count = 0;
-				count = (Integer) request.getAttribute("count");
-				String[] first_name = (String[]) request.getAttribute("first_name");
-				String[] group_name = (String[]) request.getAttribute("group_name");
-				first_name = (String[]) request.getAttribute("first_name");
-				group_name = (String[]) request.getAttribute("group_name");
-				for (i = 0; i < count; i++) {
-			%>
-				<tr>
-					<td><input type='checkbox' id='<%=j%>' name='requests'
-						value='<%=j%>'> <%
-						out.println(first_name[i] + " requests approval for " + group_name[i]);
-					%></td>
 
-				</tr>
-				<%
-				j++;
-				}
-
-				System.out.println("value of i = " + i);
-			%>
-
-				<tr>
-					<td><input type="submit" name="subAdd" align="middle"
-						id="subAdd" value="Add"> <input type="submit"
-						name="subReject" align="middle" id="subReject" value="Reject">
-
-
-						<button type="submit" class="btn btn-default" align="middle"
-							name="subAdd" id="subAdd" value="Add">Add</button>
-
-						<button type="submit" class="btn btn-default" align="middle"
-							name="subReject" id="subReject" value="Reject">Reject</button></td>
-				</tr>
-
-			</table> --%>
 		</div>
 	</form>
 </body>

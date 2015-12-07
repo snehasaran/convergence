@@ -52,7 +52,7 @@ public class InsertCommentDemo {
 		{
 			
 			//System.out.println("now inserting the data");
-			//System.out.println("Now inserting the data in table post_id = "+ post_id + " comment: "+ this.comment_to_insert);
+			System.out.println("Now inserting the data in table post_id = "+ post_id + " person " + person_id + " "+  "comment: "+ this.comment_to_insert);
 			
 			String insertSQL = "INSERT INTO comment (p_id, person_id, comment) VALUES (?, ?, ?)";
 			PreparedStatement preparedStatement = getConnection().prepareStatement(insertSQL);

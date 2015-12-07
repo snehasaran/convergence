@@ -148,4 +148,55 @@ public class DBDemo {
 		return false;
 
 	}
+	
+	/*Brinal changes to get rolename for user*/
+	public String getRole(DBDemo d) throws SQLException
+	{
+		PreparedStatement ps;
+		try
+		{
+			ps = getConnection().prepareStatement
+					("select role_name from person where user_name = '"+d.uname+"'");
+			ResultSet rs = ps.executeQuery();
+			int resultsCounter = 0; 
+			while(rs.next())
+			{
+				resultsCounter++;
+				if (resultsCounter == 0)
+				{
+					System.out.println("result set is empty");
+					return "";
+				}
+				else
+				{
+					if (rs.getString(1).toLowerCase().equals("user"))
+					{
+						System.out.println("Role is User");
+						return "user";
+					}
+					else if (rs.getString(1).toLowerCase().equals("admin"))
+					{
+						System.out.println("Role is Admin");
+						return "admin";
+					}
+					else if (rs.getString(1).toLowerCase().equals("groupadmin"))
+					{
+						System.out.println("Role is Admin");
+						return "groupadmin";
+					}
+				}
+			}
+
+			rs.close();
+			ps.close();
+	    }
+		catch (SQLException e) 
+		{
+			System.out.println("Cannot run the query");
+			e.printStackTrace();
+		}
+		
+		return "user";
+
+	}
 }

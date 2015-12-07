@@ -34,9 +34,9 @@ private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
-		String req = request.getParameter("comment");
-		if(req != null )
+		HttpSession session = request.getSession();
+		String req = request.getParameter("comment-text-area");
+		if(req != "" )
 		{
 			System.out.println("Came in CommentServlet");
 			this.insertRequest(request, response);
@@ -45,6 +45,8 @@ private static final long serialVersionUID = 1L;
 		else
 		{
 			System.out.println("No data to insert");
+			RequestDispatcher rd = request.getRequestDispatcher("Group_page.jsp?group_id=" + session.getAttribute("group_id") + "&group_name=" +session.getAttribute("group_name") );
+			rd.forward(request, response);
 		}
 		
 	}
@@ -53,8 +55,8 @@ private static final long serialVersionUID = 1L;
 			HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("The control comes to insertCoommentRequest function");
-		String req = request.getParameter("comment");
-		System.out.println("The value from tezt box is :" + req);
+		String req = request.getParameter("comment-text-area");
+		System.out.println("The value from text box is :" + req);
 		demo.setInsertCommentDemo(req);
 		
 		System.out.println("Username from text box is " + req );
@@ -64,11 +66,12 @@ private static final long serialVersionUID = 1L;
 			HttpSession session = request.getSession();
 				System.out.println("The control comes here in servlet page ");
 				int person_id = (int) session.getAttribute("person_id");
-				System.out.println("The value from session page is : " + session.getAttribute("post_id"));
-				post_id =  Integer.valueOf((String) session.getAttribute("post_id"));
+				
+				post_id =  Integer.parseInt(request.getParameter("post-id"));
 				System.out.println("The control comes here in servlet page ---2 : ");
 				this.demo.InsertCommentDemo(demo, post_id,person_id);
 				System.out.println("the group_id on insertpostservlet is : " );
+			
 				RequestDispatcher rd = request.getRequestDispatcher("Group_page.jsp?group_id=" + session.getAttribute("group_id") + "&group_name=" +session.getAttribute("group_name") );
 				
 				rd.forward(request, response);
@@ -78,6 +81,5 @@ private static final long serialVersionUID = 1L;
 			e.printStackTrace();
 		}
 	}
-
 }
 

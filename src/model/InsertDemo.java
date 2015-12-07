@@ -60,6 +60,7 @@ public class InsertDemo {
 			preparedStatement.setString(2, this.post_to_insert);
 			preparedStatement.setInt(3,person_id);
 			preparedStatement.executeUpdate();
+			System.out.println(group_id + " " + this.post_to_insert + " " + person_id);
 	    }
 		catch (SQLException e) 
 		{

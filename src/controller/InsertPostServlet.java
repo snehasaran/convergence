@@ -34,9 +34,9 @@ private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
-		String req = request.getParameter("text");
-		if(req != null )
+		HttpSession session = request.getSession();
+		String req = request.getParameter("post-text");
+		if(req != "" )
 		{
 			System.out.println("Came in InsertPostServlet");
 			this.insertRequest(request, response);
@@ -45,6 +45,8 @@ private static final long serialVersionUID = 1L;
 		else
 		{
 			System.out.println("No data to insert");
+			RequestDispatcher rd = request.getRequestDispatcher("Group_page.jsp?group_id=" + session.getAttribute("group_id") + "&group_name=" +session.getAttribute("group_name") );	
+			rd.forward(request, response);
 		}
 		
 	}
@@ -53,7 +55,7 @@ private static final long serialVersionUID = 1L;
 			HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("The control comes to insertRequest function");
-		String req = request.getParameter("text");
+		String req = request.getParameter("post-text");
 		System.out.println("The value from tezt box is :" + req);
 		demo.setInsertPost(req);
 		
@@ -65,12 +67,11 @@ private static final long serialVersionUID = 1L;
 				System.out.println("The control comes here in servlet page ");
 				int person_id = (int) session.getAttribute("person_id");
 				System.out.println("The value from session page is : " + session.getAttribute("group_id"));
-				group_id =  Integer.valueOf((String) session.getAttribute("group_id"));
+				group_id =  Integer.parseInt(((String) session.getAttribute("group_id")).trim());
 				System.out.println("The control comes here in servlet page ---2 : ");
 				this.demo.InsertPost(demo, group_id, person_id );
 				System.out.println("the group_id on insertpostservlet is : " );
 				RequestDispatcher rd = request.getRequestDispatcher("Group_page.jsp?group_id=" + session.getAttribute("group_id") + "&group_name=" +session.getAttribute("group_name") );
-				
 				rd.forward(request, response);
 			
 		} catch (SQLException e) {

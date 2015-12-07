@@ -12,7 +12,6 @@
 
 <% session.setAttribute("post_id", request.getParameter("post_id"));%></h3>
 
-
 <form name="Insert_comment_page" action="comment" method="post">
 <table id = "alignment" align = "center">
 <tr>

@@ -43,21 +43,15 @@
 			<%
 				String user_name = new String();
 				user_name = request.getParameter("user_name");
-				System.out.println("MySQL Conn/LoginServletect Example.");
 				Connection conn = null;
 				String url = "jdbc:mysql://localhost:3306/";
 				String dbName = "hw5";
 				String driver = "com.mysql.jdbc.Driver";
 				String userName = "admin";
 				String password = "";
-				System.out.println("From succesful login " + session.getAttribute("role"));
 				try {
-					System.out.println("Test 1");
 					Class.forName(driver).newInstance();
-					System.out.println("Test 2");
 					conn = DriverManager.getConnection(url + dbName, userName, password);
-					System.out.println("Test 3");
-					System.out.println("got the pages successfully");
 					String query = "select person_id from person where user_name = '" + user_name + "'";
 					System.out.println("query to be executed is: " + query);					
 					Statement stmt = conn.createStatement();
@@ -73,10 +67,6 @@
 				Welcome
 				<%out.print(user_name);%>
 			</h2>
-			<!-- Sneha changes start here -->
-
-
-			<!-- new changes -->
 			<div class="container">
 				<div id = "tabs">
 					<ul>
@@ -85,10 +75,8 @@
 					</ul>
 					<div id = "tabs-1" class="list-my-groups">
 						<%	
-	 						query = "select group_name, group_id, group_descr  from groups where activated_flag = true and group_id in (select group_id from group_person where person_id in(select person_id from person where user_name = '"
-	 								+ user_name + "'))";
-							//query = "select * from groups";
-							System.out.println("query to be executed is: " + query);
+	 						query = "select group_name, group_id, group_descr from groups where activated_flag = true and group_id in (select group_id from group_person where person_id in(select person_id from person where user_name = '"
+	 								+ user_name + "') and flag='Approved')";
 							stmt = conn.createStatement();
 							rs = stmt.executeQuery(query);
 							HashSet<Integer> myGroupIds = new HashSet<Integer>();
@@ -127,8 +115,6 @@
 						</div>
 	
 						<%
-								//System.out.println(rs.getInt("group_id"));
-								//System.out.println(rs.getString("group_name"));
 							}									
 						%>
 	
@@ -171,8 +157,6 @@
 						</div>
 	
 						<%
-								System.out.println(rs.getInt("group_id"));
-								System.out.println(rs.getString("group_name"));
 							}
 						}
 						catch (SQLException e) {
@@ -191,10 +175,6 @@
 <script type="text/javascript"> 
 
 var $ = jQuery;
-/* $('form input:submit').bind('click', function(event){
-
-	$(event.target).attr('disabled', true);	
-}); */
 $(function() {
 	
     $( "#tabs" ).tabs();

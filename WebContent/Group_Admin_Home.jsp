@@ -40,16 +40,11 @@
 	</nav>
 
 
-
-
-
-
 	<div class="container-fluid ">
 
 		<%
 			String user_name = new String();
 				user_name = request.getParameter("user_name");
-				System.out.println("MySQL Conn/LoginServletect Example.");
 				Connection conn = null;
 				String url = "jdbc:mysql://localhost:3306/";
 				String dbName = "hw5";
@@ -57,14 +52,9 @@
 				String userName = "admin";
 				String password = "";
 				try {
-					System.out.println("Test 1");
 					Class.forName(driver).newInstance();
-					System.out.println("Test 2");
 					conn = DriverManager.getConnection(url + dbName, userName, password);
-					System.out.println("Test 3");
-					System.out.println("got the pages successfully");
-					String query = "select person_id from person where user_name = '" + user_name + "'";
-					System.out.println("query to be executed is: " + query);					
+					String query = "select person_id from person where user_name = '" + user_name + "'";					
 					Statement stmt = conn.createStatement();
 					ResultSet rs = stmt.executeQuery(query);	
 					while(rs.next()) {
@@ -77,30 +67,26 @@
 			out.print(user_name);
 		%>
 		</h2>
-		<!-- Sneha changes start here -->
-
-
-		<!-- new changes -->
+		
 		<div class="container">
 			<div id="tabs">
 				<ul>
 					<li><a href="#tabs-1">My groups</a></li>
 					<li><a href="#tabs-2">Groups</a></li>
 					<li><a href="#tabs-3">Dashboard</a></li>
-					<li><a href="#tabs-4">Endorse</li>
+					<li><a href="#tabs-4">Endorse</a></li>
 				</ul>
 				<div id="tabs-1" class="list-my-groups">
 					<%
 						query = "select group_name, group_id, group_descr  from groups where activated_flag=true and "
 															 						+ "group_id in (select group_id from group_person where person_id in(select person_id from person where user_name = '"
-															 								+ user_name + "'))";
-																			//query = "select * from groups";
-																			System.out.println("query to be executed is: " + query);
-																			stmt = conn.createStatement();
-																			rs = stmt.executeQuery(query);
-																			HashSet<Integer> myGroupIds = new HashSet<Integer>();
-																			while (rs.next()) {
-																				myGroupIds.add(rs.getInt("group_id"));
+															 								+ user_name + "') and flag='Approved')";
+						System.out.println("query to be executed is: " + query);
+						stmt = conn.createStatement();
+						rs = stmt.executeQuery(query);
+						HashSet<Integer> myGroupIds = new HashSet<Integer>();
+						while (rs.next()) {
+							myGroupIds.add(rs.getInt("group_id"));
 					%>
 
 					<div class="row">
@@ -137,8 +123,7 @@
 					</div>
 
 					<%
-						System.out.println(rs.getInt("group_id"));
-																				System.out.println(rs.getString("group_name"));
+
 																			}
 					%>
 
@@ -147,12 +132,12 @@
 				<div id="tabs-2" class="list-groups">
 					<%
 						query = "select * from groups where activated_flag = true";
-																			System.out.println("query to be executed is: " + query);
-																			stmt = conn.createStatement();
-																			rs = stmt.executeQuery(query);
-																			boolean isSubscribed = true;
-																			while (rs.next()) {
-																				isSubscribed = myGroupIds.contains(rs.getInt("group_id"));
+						
+						stmt = conn.createStatement();
+						rs = stmt.executeQuery(query);
+						boolean isSubscribed = true;
+						while (rs.next()) {
+							isSubscribed = myGroupIds.contains(rs.getInt("group_id"));
 					%>
 
 					<div class="row">
@@ -184,14 +169,13 @@
 					</div>
 
 					<%
-						System.out.println(rs.getInt("group_id"));
-																				System.out.println(rs.getString("group_name"));
-																			}
-																		}
-																		catch (SQLException e) {
-																			// TODO Auto-generated catch block
-																			e.printStackTrace();
-																		}
+
+										}
+									}
+									catch (SQLException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
 					%>
 
 				</div>
@@ -208,15 +192,15 @@
 									<div class="checkbox">
 										<%
 											Integer i = 0;
-																																						Integer j = 0;
-																																						Integer count = 0;
-																																						count = (Integer) request.getAttribute("count");
-																																						String[] first_name = (String[]) request.getAttribute("first_name");
-																																						String[] group_name = (String[]) request.getAttribute("group_name");
-																																						first_name = (String[]) request.getAttribute("first_name");
-																																						group_name = (String[]) request.getAttribute("group_name");
-																																						if(count != null){
-																																						for (i = 0; i < count; i++) {
+											Integer j = 0;
+											Integer count = 0;
+											count = (Integer) request.getAttribute("count");
+											String[] first_name = (String[]) request.getAttribute("first_name");
+											String[] group_name = (String[]) request.getAttribute("group_name");
+											first_name = (String[]) request.getAttribute("first_name");
+											group_name = (String[]) request.getAttribute("group_name");
+											if(count != null){
+											for (i = 0; i < count; i++) {
 										%>
 										<label> <input type='checkbox' id='<%=j%>'
 											name='requests' value='<%=j%>'> <%
@@ -224,9 +208,9 @@
  %></label><br />
 										<%
 											j++;
-																																						}
-																																						}
-																																						System.out.println("value of i = " + i);
+											}
+											}
+											
 										%>
 
 									</div>
@@ -253,13 +237,11 @@
 															 						+ "group_id in (select group_id from group_admins where person_id in(select person_id from person where user_name = '"
 															 								+ user_name + "'))";
 												
-											
-																			System.out.println("query to be executed is: " + query);
-																			Statement stmt = conn.createStatement();
-																			ResultSet rs = stmt.executeQuery(query);
-																			HashSet<Integer> myGroupIds = new HashSet<Integer>();
-																			while (rs.next()) {
-																				myGroupIds.add(rs.getInt("group_id"));
+						Statement stmt = conn.createStatement();
+						ResultSet rs = stmt.executeQuery(query);
+						HashSet<Integer> myGroupIds = new HashSet<Integer>();
+						while (rs.next()) {
+							myGroupIds.add(rs.getInt("group_id"));
 					%>
 
 					<div class="row">
@@ -296,8 +278,7 @@
 					</div>
 
 					<%
-						System.out.println(rs.getInt("group_id"));
-																				System.out.println(rs.getString("group_name"));
+						
 																			}
 					%>
 
@@ -306,15 +287,11 @@
 
 			</div>
 		</div>
-		<!-- new changes end -->
+		
 	</div>
 </body>
 <script type="text/javascript">
 	var $ = jQuery;
-	/* $('form input:submit').bind('click', function(event){
-
-	 $(event.target).attr('disabled', true);	
-	 }); */
 	$(function() {
 
 		$("#tabs").tabs();

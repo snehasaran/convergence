@@ -133,7 +133,9 @@ public class GroupAdminHome {
 			System.out.println("Cannot run the query");
 			e.printStackTrace();
 			
+			
 		}
+		
 	}
 	
 	public void rejectUpdate(Map<Integer, String> chkbox)

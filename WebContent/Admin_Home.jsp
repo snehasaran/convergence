@@ -88,7 +88,7 @@
 				<div class="form-group">
 					<div class="col-lg-10">
 						<div class="checkbox">
-						
+
 							<!-- Sneha changes below -->
 							<%
 								Integer i = 0;
@@ -97,15 +97,15 @@
 								count = (Integer) request.getAttribute("count");
 								String[] group_name = (String[]) request.getAttribute("group_name");
 								group_name = (String[]) request.getAttribute("group_name");
+								if(count != null){
 								for (i = 0; i < count; i++) {
 							%>
 							<label> <input type='checkbox' id='<%=j%>'
-								name='requests' value='<%=j%>'> 
-								<% 	out.println(group_name[i]); %></label><br />
+								name='requests' value='<%=j%>'> <% 	out.println(group_name[i]); %></label><br />
 							<%
 								j++;
 								}
-
+								}
 								System.out.println("value of i = " + i);
 							%>
 

@@ -38,7 +38,8 @@ public class LoginServlet extends HttpServlet {
 		String req1 = request.getParameter("subAdd");
 		String req2 = request.getParameter("subReject");
 		int j = 0;
-
+		HttpSession session = request.getSession();
+		String name = (String) session.getAttribute("user_name");
 		Map<Integer, String> chkbox = new HashMap<Integer, String>();
 		String[] checkboxes = new String[1000];
 		System.out.println("Inside login servlet");
@@ -56,14 +57,19 @@ public class LoginServlet extends HttpServlet {
 		{
 			System.out.println("Calling add method....");
 			try{
+				
 				if(this.demo.getRole(demo).equals("groupadmin")){
-					groupAdmin.addUpdate(chkbox);
+					 groupAdmin.addUpdate(chkbox);
 					System.out.println("Calling group admin add method....");
+					System.out.println("Name:" + name);
+					RequestDispatcher rd = request.getRequestDispatcher("Group_Admin_Home.jsp?user_name=" + name);
+					rd.forward(request,response);
 				}
 
 				else{
 					admin.addUpdate(chkbox);
 					System.out.println("Calling admin add method....");
+					response.sendRedirect("Login.jsp");
 				}
 
 			}
@@ -81,6 +87,8 @@ public class LoginServlet extends HttpServlet {
 					if(this.demo.getRole(demo).equals("groupadmin")){
 						groupAdmin.rejectUpdate(chkbox);
 						System.out.println("Calling group admin reject method....");
+						RequestDispatcher rd = request.getRequestDispatcher("Group_Admin_Home.jsp?user_name=" + name);
+						rd.forward(request,response);
 					}
 					else{
 						groupAdmin.rejectUpdate(chkbox);
@@ -114,13 +122,41 @@ public class LoginServlet extends HttpServlet {
 				this.loginRequest(request, response);
 			}
 			else if(req.equals("Create")){
+				HttpSession session = request.getSession();
+				String name = (String) session.getAttribute("user_name");
+				
 				String groupName = request.getParameter("txtGroupName");
 				String groupDescr = request.getParameter("txtGroupDescr");
 				admin.createGroup(groupName,groupDescr);
+				RequestDispatcher rd = request.getRequestDispatcher("Admin_Home.jsp?user_name=" + name);
+				admin.displayRequests();
+				System.out.println("count is " + admin.count);
+				request.setAttribute("count",admin.count);
+				for (int i=0; i<admin.first_name.length;i++)
+				{
+					if(admin.first_name[i] != null)
+					{	request.setAttribute("first_name",admin.first_name);
+					System.out.println("first_name " + admin.first_name[i]);
+					}	
+				}
+
+
+				for (int i=0; i<admin.group_name.length;i++)
+				{
+					if (admin.group_name[i] != null && !admin.group_name[i].isEmpty())
+					{
+						System.out.println("group_name in loginservlet is for admin: " + admin.group_name[i]);
+						request.setAttribute("group_name",admin.group_name);
+					}
+
+				}
+
+				rd.forward(request,response);
 			}
 			else if(req.equals("Deactivate")){
 				int j = 0;
-
+				HttpSession session = request.getSession();
+				String name = (String) session.getAttribute("user_name");
 				Map<Integer, String> chkbox = new HashMap<Integer, String>();
 				String[] checkboxes = new String[1000];
 				System.out.println("Inside doPost Method of loginServlet");
@@ -134,6 +170,30 @@ public class LoginServlet extends HttpServlet {
 				
 				//String groupToDeactivate = request.getParameter("requests");
 				admin.deactivateGroup(chkbox);
+				RequestDispatcher rd = request.getRequestDispatcher("Admin_Home.jsp?user_name=" + name);
+				admin.displayRequests();
+				System.out.println("count is " + admin.count);
+				request.setAttribute("count",admin.count);
+				for (int i=0; i<admin.first_name.length;i++)
+				{
+					if(admin.first_name[i] != null)
+					{	request.setAttribute("first_name",admin.first_name);
+					System.out.println("first_name " + admin.first_name[i]);
+					}	
+				}
+
+
+				for (int i=0; i<admin.group_name.length;i++)
+				{
+					if (admin.group_name[i] != null && !admin.group_name[i].isEmpty())
+					{
+						System.out.println("group_name in loginservlet is for admin: " + admin.group_name[i]);
+						request.setAttribute("group_name",admin.group_name);
+					}
+
+				}
+
+				rd.forward(request,response);
 			}
 
 		}
@@ -182,19 +242,20 @@ public class LoginServlet extends HttpServlet {
 			System.out.println("ERROR: " + e.getMessage());
 			e.printStackTrace();
 		}
+		String name = request.getParameter("txtUserName");
+		session = request.getSession();
+		session.setAttribute("chkuser",demo.chkuser);
+		System.out.println("chkuser = " + demo.chkuser);
+		session.setAttribute("person_id", demo.person_id);
+		session.setAttribute("user_name",name);
 
 		try {
 			if (this.demo.validateUser(demo))
 			{
 				System.out.println("The control comes here");
 
-				String name = request.getParameter("txtUserName");
-				session = request.getSession();
-				session.setAttribute("chkuser",demo.chkuser);
-				System.out.println("chkuser = " + demo.chkuser);
-				session.setAttribute("person_id", demo.person_id);
-				session.setAttribute("user_name",name);
-
+				
+				
 				if (this.demo.getRole(demo).equals("user"))
 				{
 					request.setAttribute("role", "User");

@@ -97,7 +97,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		</div>
 	</div>
 	</nav>
-
+	
 	
 	<div class="container-fluid col-md-offset-2 col-md-8" >
 		<h2 align="center">

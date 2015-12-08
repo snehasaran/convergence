@@ -212,7 +212,6 @@ public class AdminHome
 		{
 			System.out.println("Cannot run the query");
 			e.printStackTrace();
-
 		}
 	}
 

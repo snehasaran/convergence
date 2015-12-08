@@ -63,18 +63,6 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		});
 	});
 
-	
-
-	
-
-	function editpost(value)
-	{
-		var changed_post = document.getElementById(value).value;
-		//alert("control comes here !! yeeee" + changed_post);
-		document.location.href="updatepost?post_id=" + value +"&post=" + changed_post;
-		//alert ("the call was successful");
-	}
-
 </script>
 
 </head>
@@ -242,7 +230,6 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 					id = rs.getInt("id");
 					session.setAttribute("post_id", id);
 					post = rs.getString("post");
-					System.out.println("Comment is : " + post);
 			%>
 				</div>
 				<form action="comment" method="post" class="form-horizontal">

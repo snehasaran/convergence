@@ -49,10 +49,7 @@
 				out.println(user_name);
 			%>
 			</h2>
-			<!-- Sneha changes -->
 
-
-			<!-- New buttons -->
 			<div class="well well-sm">
 				<div class="form-group">
 					<label for="groupName" class="col-sm-2 control-label">Group
@@ -89,7 +86,6 @@
 					<div class="col-lg-10">
 						<div class="checkbox">
 
-							<!-- Sneha changes below -->
 							<%
 								Integer i = 0;
 								Integer j = 0;
@@ -106,7 +102,6 @@
 								j++;
 								}
 								}
-								System.out.println("value of i = " + i);
 							%>
 
 						</div>
@@ -121,14 +116,6 @@
 						name="subLogin" id="deactivateGroup" value="Deactivate">Deactivate</button>
 				</div>
 			</div>
-
-
-
-			<!-- New buttons end here -->
-
-
-			<!-- Sneha changes end -->
-
 
 		</div>
 	</form>
